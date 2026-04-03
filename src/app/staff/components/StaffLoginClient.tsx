@@ -45,10 +45,6 @@ export function StaffLoginClient() {
             <ShieldCheck className="w-8 h-8" />
           </div>
           <h1 className="text-3xl font-bold text-text heading-thai">Staff Portal</h1>
-          <p className="text-text-light font-prompt text-sm mt-2 text-center">
-            ระบบจำกัดการเข้าถึง<br/>
-            (Admin PIN: 9999 / Receptionist PIN: 1234)
-          </p>
         </div>
 
         <div className="glass rounded-3xl p-8 shadow-sm">
