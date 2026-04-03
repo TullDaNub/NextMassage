@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-sarabun);
+  --font-heading: var(--font-kanit);
+  --font-prompt: var(--font-sarabun); /* Alias for existing components */
+  
+  /* Thai Vintage Theme (ทอง / น้ำตาลเข้ม) */
+  --color-primary: #d97706; /* amber-600 */
+  --color-primary-dark: #b45309; /* amber-700 */
+  --color-secondary: #fde68a; /* amber-200 */
+  --color-background: #2b1f1a; /* rich dark brown */
+  --color-surface: #3d2a23; /* lighter dark brown */
+  --color-text: #fdf6e3; /* warm off-white */
+  --color-text-light: #d6d3d1; /* stone-300 */
+
+  /* Override standard white and gray for simple dark mode across the app */
+  --color-white: #3d2a23; /* mapped surface color */
+  --color-black: #fdf6e3;
+  
+  --color-gray-50: #2b1f1a;
+  --color-gray-100: #3d2a23;
+  --color-gray-200: #543a30;
+  --color-gray-300: #6b4c40;
+  --color-gray-400: #856153;
+  --color-gray-500: #a8a29e;
+  --color-gray-600: #d6d3d1;
+  --color-gray-700: #e7e5e4;
+  --color-gray-800: #f5f5f4;
+  --color-gray-900: #fafaf9;
+
+  /* Adjust feedback colors for dark mode */
+  --color-red-50: #450a0a;
+  --color-red-100: #7f1d1d;
+  --color-red-500: #f87171;
+  
+  --color-green-50: #052e16;
+  --color-green-100: #14532d;
+  --color-green-600: #4ade80;
+
+  --color-yellow-50: #422006;
+  --color-yellow-100: #713f12;
+  --color-yellow-700: #fde047;
+
+  --color-blue-50: #172554;
+  --color-blue-100: #1e3a8a;
+  --color-blue-700: #93c5fd;
+  
+  --color-status-green: #4ade80;
+  --color-status-yellow: #facc15;
+  --color-status-red: #f87171;
+  --color-status-blue: #60a5fa;
+  --color-status-gray: #9ca3af;
+}
+
+@layer base {
+  :root {
+    --background: var(--color-background);
+    --foreground: var(--color-text);
+  }
+
+  body {
+    @apply bg-[var(--background)] text-[var(--foreground)] font-sans antialiased selection:bg-primary/30;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-surface/70 backdrop-blur-md border border-[#543a30] shadow-xl;
+  }
+  
+  .heading-thai {
+    @apply font-heading font-medium tracking-wide;
+  }
+  
+  .btn-primary {
+    @apply relative overflow-hidden bg-primary text-[#ffffff] font-medium px-6 py-3 rounded-xl shadow-lg shadow-primary/20 transition-all hover:bg-primary-dark hover:scale-[1.02] hover:shadow-primary/40 active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary font-medium px-6 py-3 rounded-xl transition-all hover:bg-primary/20 active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
+  }
+}
