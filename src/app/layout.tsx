@@ -40,8 +40,8 @@ export default function RootLayout({
             <div>
               <h3 className="text-xl heading-thai text-primary mb-4 font-medium">บ้านเรือนทองนวดเพื่อสุขภาพ</h3>
               <p className="text-text-light font-prompt text-sm leading-relaxed">
-                สัมผัสประสบการณ์การพักผ่อนเหนือระดับ<br/>
-                กับบริการนวดแผนไทยและสปาครบวงจร
+                เราไม่ได้ต้องการกำไรมากมายแค่<br/>
+                อยากให้ทุกท่านสามารถมาใช้บริการเพื่อผ่อนคลายตามกำลัง
               </p>
             </div>
             
@@ -50,11 +50,11 @@ export default function RootLayout({
               <div className="space-y-3 font-prompt text-sm text-text-light">
                 <div className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-primary" />
-                  <span>095-891-1135</span>
+                  <span>0967749659</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <MapPin className="w-4 h-4 text-primary" />
-                  <span>123 ถ.สุขุมวิท เขตวัฒนา กรุงเทพฯ 10110</span>
+                  <span>63/1 ม.5 ต.เหมือง อ.เมือง จ.ชลบุรี 20130</span>
                 </div>
               </div>
             </div>
@@ -75,7 +75,7 @@ export default function RootLayout({
             </div>
           </div>
           <div className="mt-8 pt-6 border-t border-gray-200/10 text-center text-xs text-text-light font-prompt opacity-60">
-            &copy; {new Date().getFullYear()} บ้านเรือนทองนวดเพื่อสุขภาพ. All rights reserved. <span className="ml-1 text-primary">by Tull</span>
+            &copy; {new Date().getFullYear()} หจก.วงศ์ไพรัช. All rights reserved. <span className="ml-1 text-primary">by Tull</span>
           </div>
         </footer>
       </body>
