@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { supabase } from "@/lib/supabase/client"
 import { Database } from "@/types/database.types"
-import { Plus, Edit2, CheckCircle2, Wrench } from "lucide-react"
+import { Plus, Edit2, CheckCircle2, Wrench, Trash2 } from "lucide-react"
 
 type Room = Database['public']['Tables']['rooms']['Row']
 
@@ -63,6 +63,19 @@ export function RoomManager() {
     const newStatus = currentStatus === 'active' ? 'maintenance' : 'active'
     await supabase.from('rooms').update({ status: newStatus }).eq('id', id)
     fetchRooms()
+  }
+
+  const handleDelete = async (id: string, name: string) => {
+    if (!window.confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบห้อง "${name}"? การดำเนินการนี้ไม่สามารถย้อนกลับได้`)) return
+    
+    setLoading(true)
+    const { error } = await supabase.from('rooms').delete().eq('id', id)
+    if (error) {
+      alert("ไม่สามารถลบห้องได้: " + error.message)
+      setLoading(false)
+    } else {
+      await fetchRooms()
+    }
   }
 
   return (
@@ -137,9 +150,14 @@ export function RoomManager() {
                   </button>
                 </td>
                 <td className="p-3 text-center">
-                  <button onClick={() => handleEdit(r)} className="p-1.5 text-gray-500 hover:text-primary hover:bg-primary/10 rounded-lg transition-colors">
-                    <Edit2 className="w-4 h-4" />
-                  </button>
+                  <div className="flex items-center justify-center gap-2">
+                    <button onClick={() => handleEdit(r)} className="p-1.5 text-gray-500 hover:text-primary hover:bg-primary/10 rounded-lg transition-colors">
+                      <Edit2 className="w-4 h-4" />
+                    </button>
+                    <button onClick={() => handleDelete(r.id, r.name)} className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
