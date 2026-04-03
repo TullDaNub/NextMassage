@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import { supabase } from "@/lib/supabase/client"
 import { Database } from "@/types/database.types"
-import { Plus, Edit2, CheckCircle2, XCircle } from "lucide-react"
+import { Plus, Edit2, CheckCircle2, XCircle, Trash2 } from "lucide-react"
 
 type Service = Database['public']['Tables']['services']['Row']
 
@@ -62,6 +62,18 @@ export function ServiceManager() {
   const toggleStatus = async (id: string, currentStatus: boolean) => {
     await supabase.from('services').update({ is_active: !currentStatus }).eq('id', id)
     fetchServices()
+  }
+
+  const handleDelete = async (id: string, name: string) => {
+    if (!window.confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบบริการ "${name}"? การดำเนินการนี้ไม่สามารถย้อนกลับได้`)) return
+    
+    setLoading(true)
+    const { error } = await supabase.from('services').delete().eq('id', id)
+    if (error) {
+      alert("ไม่สามารถลบบริการได้: " + error.message)
+    } else {
+      await fetchServices()
+    }
   }
 
   return (
@@ -128,9 +140,14 @@ export function ServiceManager() {
                   </button>
                 </td>
                 <td className="p-3 text-center">
-                  <button onClick={() => handleEdit(s)} className="p-1.5 text-gray-500 hover:text-primary hover:bg-primary/10 rounded-lg transition-colors">
-                    <Edit2 className="w-4 h-4" />
-                  </button>
+                  <div className="flex items-center justify-center gap-2">
+                    <button onClick={() => handleEdit(s)} className="p-1.5 text-gray-500 hover:text-primary hover:bg-primary/10 rounded-lg transition-colors">
+                      <Edit2 className="w-4 h-4" />
+                    </button>
+                    <button onClick={() => handleDelete(s.id, s.name)} className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
